@@ -1,0 +1,93 @@
+BÀI TẬP Về nhà — DEMOQA (CÓ HƯỚNG DẪN ĐI TỚI MÀN HÌNH)
+⚠️ Lưu ý: Tất cả bài tập dùng duy nhất website DemoQA. Mỗi bài đều có phần “Hướng dẫn điều hướng” để học viên vào đúng màn hình trước khi làm.
+Yêu cầu chung: Viết locator bằng nhiều cách (ID, Name, CSS Selector, XPath) và luyện các axes XPath (parent::, ancestor::, following-sibling::). Không kèm đáp án trong tài liệu này.
+Bài 1 — Text Box
+Trang bài tập: https://demoqa.com/text-box
+Hướng dẫn điều hướng:
+1) Mở trình duyệt và truy cập https://demoqa.com
+2) Ở trang chủ DemoQA, nhấn vào card **Elements** (biểu tượng hình khối).
+3) Ở menu trái, chọn **Text Box**.
+4) Xác nhận bạn đang ở URL **/text-box**.
+Yêu cầu:
+1) Viết 4 cách khác nhau locate ô **Full Name**.
+//input[@placeholder ='Full Name']
+//input[@id ='userName']
+(//input[@autocomplete ='off'])[1]
+Bằng CSS: input[id ='userName']
+
+2) Locate **Email** bằng **CSS theo thuộc tính**.
+input[id ='userEmail']
+//input[@id ='userEmail']
+3) Locate **Submit** bằng **CSS theo ID** và bằng **XPath dựa theo anh em cùng cấp** của `#currentAddress`.
+CSS: button[id ='submit']
+Cùng cấp: (//textarea[@id='currentAddress'])//parent::div//button[@placeholder='Current Address']
+Bài 2 — Buttons
+Trang bài tập: https://demoqa.com/buttons
+Hướng dẫn điều hướng:
+1) Từ trang chủ DemoQA → nhấn **Elements**.
+2) Ở menu trái, chọn **Buttons**.
+3) Xác nhận URL là **/buttons**.
+Yêu cầu:
+1) Tìm nút **Double Click Me** bằng: **ID**, **CSS**, **XPath theo text**.
+ID: //button[@id='doubleClickBtn']
+CSS: button[id='doubleClickBtn']
+Xpath theo text: //button[text()='Double Click Me']
+2) **Từ** nút **Right Click Me**, dùng **following-sibling::** để tới nút **Click Me**.
+//button[text()='Right Click Me']/parent::div//following-sibling::div/button[text()='Click Me']
+3) (Bonus) Viết XPath chứa **một phần text** (partial) để trỏ tới nút Double Click.
+//button[contains(text(),'Double Click')]
+Bài 3 — Links
+Trang bài tập: https://demoqa.com/links
+Hướng dẫn điều hướng:
+1) Từ trang chủ DemoQA → nhấn **Elements**.
+2) Ở menu trái, chọn **Links**.
+3) Xác nhận URL là **/links**.
+Yêu cầu:
+1) Locate link **Home** bằng **LinkText** và **PartialLinkText**.
+LinkText : Đúng 100% chữ
+**PartialLinkText**: Chỉ cần một phần chữ
+2) Dùng **XPath** tìm link **Moved** theo **text**.
+//a[text()='Moved']
+3) **Từ** link **Home** đầu tiên, chọn **link kế tiếp** (sibling) bằng **following-sibling::**.
+//a[text()='Home']/parent::p//following-sibling::p/a[text()='Home' and 'EmVt4']
+Bài 4 — Check Box
+Trang bài tập: https://demoqa.com/checkbox
+Hướng dẫn điều hướng:
+1) Từ trang chủ DemoQA → nhấn **Elements**.
+2) Ở menu trái, chọn **Check Box**.
+3) Xác nhận URL là **/checkbox**.
+Yêu cầu:
+1) Từ nhãn **“Home”**, dùng **ancestor::** để về container node rồi locate **biểu tượng checkbox** bên trái (phần có thể click).
+//span[text()='Home']/ancestor::label//span[@class='rct-checkbox']
+2) Từ node **“Documents”**, dùng **following-sibling::** (hoặc **preceding-sibling::** tùy DOM) để tìm **biểu tượng toggle** (mũi tên) của cùng cấp.
+//span[text()='Documents']/parent::label//flowing-sibling::button[@aria-label='Toggle']
+3) Chọn checkbox **“Downloads”** bằng XPath theo **text** rồi đi **ngược lên (parent/ancestor)** đến phần tử **click được**.
+//span[text()='Downloads']/parent::label//span[@class='rct-checkbox']
+Bài 5 — Radio Button
+Trang bài tập: https://demoqa.com/radio-button
+Hướng dẫn điều hướng:
+1) Từ trang chủ DemoQA → nhấn **Elements**.
+2) Ở menu trái, chọn **Radio Button**.
+3) Xác nhận URL là **/radio-button**.
+Yêu cầu:
+1) Locate radio **“Yes”** bằng **ID** và **CSS attribute**.
+ID : //label[@for='yesRadio']
+CSS: label[for='yesRadio']
+2) **Từ** text label **“Impressive”**, dùng **ancestor::** đi lên **khối chứa input thật** để locate input.
+//label[text()='Impressive']/ancestor::div//label[@for='impressiveRadio']
+
+3) Dùng **following-sibling::** để **từ input “Yes”** tìm **label** tương ứng (cùng cấp).
+ //input[@id='yesRadio']/following-sibling::label[@for='yesRadio']
+Bài 6 — Web Tables
+Trang bài tập: https://demoqa.com/webtables
+Hướng dẫn điều hướng:
+1) Từ trang chủ DemoQA → nhấn **Elements**.
+2) Ở menu trái, chọn **Web Tables**.
+3) Xác nhận URL là **/webtables**; thấy bảng với các cột: First Name, Last Name, Age, Email, Salary, Department.
+Yêu cầu:
+1) Tìm **hàng** có **First Name = "Cierra"** rồi lấy **Email** của hàng đó (dùng **following-sibling::** để di chuyển theo cột).
+//div[text()='Cierra']/following-sibling::div[3]
+
+2) **Từ ô Last Name của “Alden”**, dùng **ancestor::** lên **hàng** chứa ô đó, rồi locate **nút Edit** trong cùng hàng.
+//div[text()='Alden']/ancestor::div[@role='row']//span[@title='Edit']
+3) Tìm **tất cả các hàng sau** (following) **hàng có Age = 39** (gợi ý: xác định ô `Age=39` → lên hàng → chọn các hàng `following`).
