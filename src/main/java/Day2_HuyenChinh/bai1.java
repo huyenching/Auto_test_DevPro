@@ -1,3 +1,5 @@
+package Day2_HuyenChinh;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +10,20 @@ public class bai1 {
     public static void main(String[] args) throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         WebDriverManager.chromedriver().setup();
-        driver.get("https://demoqa.com/text-box");
+        driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
+
         Thread.sleep(5000);
+
+        WebElement clickElement = driver.findElement(By.xpath("(//div[@class='card mt-4 top-card'])[1]"));
+        clickElement.click();
+        Thread.sleep(5000);
+
+        WebElement clickTextBox = driver.findElement(By.xpath("//span[text()='Text Box']"));
+        clickTextBox.click();
+        Thread.sleep(5000);
+
+
 
         WebElement fullname = driver.findElement(By.xpath("//input[@id ='userName']"));
         fullname.sendKeys("Huyền Chinh");
@@ -23,8 +36,13 @@ public class bai1 {
         Thread.sleep(5000);
         WebElement permanentaddress = driver.findElement(By.xpath("//textarea[@id ='permanentAddress']"));
         permanentaddress.sendKeys("Thái Bình");
-        Thread.sleep(5000);
+
+
+
         WebElement button = driver.findElement(By.xpath("//button[@id='submit']"));
+        button.click();
+        Thread.sleep(5000);
+
 
         driver.close();
     }
